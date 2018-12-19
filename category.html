@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Category</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+	<h1 id='header'>Categoria</h1>
+	<div id='container'>
+		<p><label>Name:</label></p>
+		<input type="text" name="name" id="name" placeholder="Nombre">
+
+		<button id="btn" onclick="create()">Crear</button>
+	</div>
+
+</body>
+
+<script type="text/javascript">
+
+
+	$( document ).ready(function() {
+
+	});
+
+	function create(){
+		var name = document.getElementById("name").value;
+		var authorization = sessionStorage.getItem('data');
+
+		$.ajax({
+  			url: "http://localhost:8888/gpass/public/index.php/api/categories",
+  			headers:{
+  				"Authorization": authorization
+  			},
+  			method: 'POST',
+  			data:{
+  				name: name
+  			},
+  			success: function(data){
+  				console.log(data);
+  			},
+  			error: function(data){
+  				console.log(data.statusCode);
+  			}
+		})
+	}
+
+</script>
+</html>
